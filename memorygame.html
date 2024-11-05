@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1d1f27, #3e5060);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #61dafb;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 120px);
+            grid-gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .grid-item {
+            width: 120px;
+            height: 120px;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #4CAF50;
+            color: white;
+            border: 2px solid #61dafb;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid-item:hover {
+            transform: scale(1.1);
+            background-color: #3e8e41;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .grid-item:active {
+            transform: scale(0.95);
+            background-color: #388e3c;
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        button {
+            background: transparent;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Jogo da Memória</h2>
+        <div class="grid-container">
+            <!-- Criando 9 botões para o jogo -->
+            <button class="grid-item" onclick="revelar(0)">?</button>
+            <button class="grid-item" onclick="revelar(1)">?</button>
+            <button class="grid-item" onclick="revelar(2)">?</button>
+            <button class="grid-item" onclick="revelar(3)">?</button>
+            <button class="grid-item" onclick="revelar(4)">?</button>
+            <button class="grid-item" onclick="revelar(5)">?</button>
+            <button class="grid-item" onclick="revelar(6)">?</button>
+            <button class="grid-item" onclick="revelar(7)">?</button>
+            <button class="grid-item" onclick="revelar(8)">?</button>
+        </div>
+    </div>
+    
+    <script>
+        const botoes = document.querySelectorAll(".grid-item");
+        let palavras, selecionados, indiceSelecionados, paresEncontrados;
+
+        function iniciarJogo() {
+            palavras = ["IoT", "Java", "Mobile", "Front-end", "Linguagem C", "IoT", "Java", "Mobile", "Front-end"];
+            palavras = palavras.sort(() => Math.random() - 0.5);
+            
+            botoes.forEach(botao => botao.textContent = "?");
+            selecionados = [];
+            indiceSelecionados = [];
+            paresEncontrados = 0;
+        }
+
+        function revelar(indice) {
+            if (selecionados.length < 2 && !indiceSelecionados.includes(indice)) {
+                botoes[indice].textContent = palavras[indice];
+                
+                selecionados.push(palavras[indice]);
+                indiceSelecionados.push(indice);
+
+                if (selecionados.length === 2) {
+                    if (selecionados[0] === selecionados[1]) {
+                        paresEncontrados++;
+                        selecionados = [];
+                        indiceSelecionados = [];
+
+                        if (paresEncontrados === 4) {
+                            setTimeout(() => {
+                                alert("Parabéns! Você completou o jogo.");
+                                iniciarJogo();
+                            }, 500);
+                        }
+                    } else {
+                        setTimeout(() => {
+                            botoes[indiceSelecionados[0]].textContent = "?";
+                            botoes[indiceSelecionados[1]].textContent = "?";
+                            selecionados = [];
+                            indiceSelecionados = [];
+                        }, 800);
+                    }
+                }
+            }
+        }
+
+        iniciarJogo();
+    </script>
+</body>
+</html>

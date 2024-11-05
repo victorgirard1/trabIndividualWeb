@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encher Balão</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #balao {
+            width: 100px;
+            transition: width 0.2s ease, height 0.2s ease;
+            margin-bottom: 20px;
+        }
+
+        #bomba {
+            width: 50px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="balao.png" id="balao" alt="Balão">
+        <img src="bomba.png" id="bomba" alt="Bomba">
+    </div>
+
+    <script>
+        const bomba = document.getElementById('bomba');
+        const balao = document.getElementById('balao');
+
+        let larguraInicial = 100;
+        let alturaInicial = 100;
+        const incremento = 10;
+        let contadorCliques = 0;
+
+        bomba.addEventListener('click', () => {
+            if (contadorCliques < 10) {
+                contadorCliques++;
+                larguraInicial += incremento;
+                alturaInicial += incremento;
+                balao.style.width = `${larguraInicial}px`;
+                balao.style.height = `${alturaInicial}px`;
+            } else {
+                balao.src = 'bum.png';  // Troca a imagem do balão para bum.png
+                setTimeout(() => {
+                    balao.style.display = 'none';  // Oculta o balão após 1 segundo
+
+                    // Reseta o estado do balão para recomeçar
+                    contadorCliques = 0;
+                    larguraInicial = 100;
+                    alturaInicial = 100;
+                    balao.src = 'balao.png';
+                    balao.style.width = `${larguraInicial}px`;
+                    balao.style.height = `${alturaInicial}px`;
+                    balao.style.display = 'block'; // Exibe o balão novamente
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frases Motivacionais</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #7f8c8d; /* Fundo cinza */
+            color: #fff; /* Fonte branca */
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ecf0f1; /* Cor do título */
+        }
+
+        #botaoFrase {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #4CAF50; /* Cor do botão */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #botaoFrase:hover {
+            background-color: #45a049; /* Cor do botão ao passar o mouse */
+            transform: translateY(-2px);
+        }
+
+        #mensagem {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #ecf0f1; /* Cor da mensagem */
+            transition: opacity 0.3s;
+            max-width: 600px;
+            line-height: 1.5;
+            opacity: 0; /* Inicialmente invisível */
+        }
+    </style>
+</head>
+<body>
+    <h1>Frases Motivacionais</h1>
+    <button id="botaoFrase" onclick="mostrarFrase()">Clique aqui para uma frase motivacional</button>
+    <p id="mensagem"></p>
+
+    <script>
+        function fraseMotivacional() {
+            const frases = [
+                "Tudo que um sonho precisa para se relizar é de alguém que acredite nele.",
+                "O perfeito é questão de percepção.",
+                "Encontre conforto no desconforto e verá que parecerá fácil.",
+                "O único lugar onde o sucesso vem antes do trabalho é no dicionário.",
+                "Você é mais forte do que imagina.",
+                "Pequenos passos ainda são passos em direção ao sucesso.",
+                "Grandes coisas nunca vêm de zonas de conforto."
+            ];
+
+            const indiceAleatorio = Math.floor(Math.random() * frases.length);
+            return frases[indiceAleatorio];
+        }
+
+        function mostrarFrase() {
+            const mensagemEl = document.getElementById("mensagem");
+            mensagemEl.textContent = fraseMotivacional();
+            mensagemEl.style.opacity = "1"; // Define a opacidade para mostrar a mensagem
+        }
+    </script>
+</body>
+</html>

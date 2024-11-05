@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão Pequeno</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #e1e1e1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #botaoPequeno {
+            width: 1px;
+            height: 1px;
+            font-size: 1px;
+            padding: 0;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+            outline: none;
+        }
+
+        #botaoPequeno:hover {
+            transform: scale(1.3);
+            box-shadow: 0 0 12px rgba(76, 175, 80, 0.8);
+        }
+
+        #botaoPequeno:active {
+            transform: scale(1.1);
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+        }
+
+        #mensagem {
+            font-size: 1.2rem;
+            margin-top: 15px;
+            color: #f1c40f;
+            transition: color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tente clicar no botão pequeno!</h2>
+    <button id="botaoPequeno" onclick="mostrarSucesso(event)"></button>
+    <p id="mensagem"></p>
+
+    <script>
+        const mensagemEl = document.getElementById("mensagem");
+
+        function mostrarSucesso(event) {
+            event.stopPropagation();
+            mensagemEl.textContent = "Parabéns! Você clicou com sucesso!";
+            mensagemEl.style.color = "#2ecc71";
+        }
+
+        document.addEventListener("click", function() {
+            mensagemEl.textContent = "Erro! Você não clicou exatamente no botão.";
+            mensagemEl.style.color = "#e74c3c";
+        });
+    </script>
+</body>
+</html>
